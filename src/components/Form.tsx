@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { categories } from "../data/categories"
 
 export default function Formulario() {
+  const [activity, setActivity] = useState({
+    category: 1,
+    name: '',
+    calories: 0
+  })
+
   return (
     <form
       className="space-y-5 bg-white shadow p-10 rounded-lg">
@@ -12,11 +19,11 @@ export default function Formulario() {
               className="font-bold">Categoría:</label>
             <select
               className="border border-slate-300 p-2 rounded-lg w-full bg-white"
-              id="category">
+              id="category"
+              value={activity.category}>
                 {categories.map(category => (
                   <option
-                    key={category.id}
-                    value={category.id}>
+                    key={category.id}>
                     {category.name}
                   </option>
                 ))}
@@ -26,13 +33,14 @@ export default function Formulario() {
         <div
           className="grid gri-cols-1 gap-3">
             <label
-              htmlFor="activity"
+              htmlFor="name"
               className="font-bold">Actividad:</label>
             <input
-              id="activity"
+              id="name"
               type="text"
               className="border border-slate-300 p-2 rounded-lg"
               placeholder="Ej. Comida, Jugo de Naranja, Ensalada, Ejercicio, Pesas, Bicicleta"
+              value={activity.name}
             />
         </div>
         {/* Calorías */}
@@ -46,6 +54,7 @@ export default function Formulario() {
               type="number"
               className="border border-slate-300 p-2 rounded-lg"
               placeholder="Calorías. Ej. 300 0 500"
+              value={activity.calories}
             />
         </div>
 
