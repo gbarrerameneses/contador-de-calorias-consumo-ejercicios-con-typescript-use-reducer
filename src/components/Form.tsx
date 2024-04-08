@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 import { categories } from "../data/categories"
 
 export default function Formulario() {
@@ -8,13 +8,11 @@ export default function Formulario() {
     calories: 0
   })
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
     setActivity({
       ...activity, // mantiene lo que ya tenemos en el State anteriormente
-     [e.target.id] : e.target.value
+      [e.target.id] : e.target.value
     })
-    // console.log( ,'algo cambio...');
-    // console.log( ,'algo cambio...');
   }
 
   return (
