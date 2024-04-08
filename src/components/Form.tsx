@@ -8,6 +8,15 @@ export default function Formulario() {
     calories: 0
   })
 
+  const handleChange = (e) => {
+    setActivity({
+      ...activity, // mantiene lo que ya tenemos en el State anteriormente
+     [e.target.id] : e.target.value
+    })
+    // console.log( ,'algo cambio...');
+    // console.log( ,'algo cambio...');
+  }
+
   return (
     <form
       className="space-y-5 bg-white shadow p-10 rounded-lg">
@@ -20,13 +29,17 @@ export default function Formulario() {
             <select
               className="border border-slate-300 p-2 rounded-lg w-full bg-white"
               id="category"
-              value={activity.category}>
+              value={activity.category}
+              onChange={handleChange}
+              >
+
                 {categories.map(category => (
                   <option
                     key={category.id}>
                     {category.name}
                   </option>
                 ))}
+
             </select>
         </div>
         {/* Actividades */}
@@ -41,6 +54,7 @@ export default function Formulario() {
               className="border border-slate-300 p-2 rounded-lg"
               placeholder="Ej. Comida, Jugo de Naranja, Ensalada, Ejercicio, Pesas, Bicicleta"
               value={activity.name}
+              onChange={handleChange}
             />
         </div>
         {/* Calorías */}
@@ -55,6 +69,7 @@ export default function Formulario() {
               className="border border-slate-300 p-2 rounded-lg"
               placeholder="Calorías. Ej. 300 0 500"
               value={activity.calories}
+              onChange={handleChange}
             />
         </div>
 
