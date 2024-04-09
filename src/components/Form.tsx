@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { Activity } from "../types"
 import { categories } from "../data/categories"
 
@@ -26,9 +26,16 @@ export default function Formulario() {
     return name.trim() !== '' && calories > 0
   }
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    console.log('submit');
+
+  }
   return (
     <form
-      className="space-y-5 bg-white shadow p-10 rounded-lg">
+      className="space-y-5 bg-white shadow p-10 rounded-lg"
+      onSubmit={handleSubmit}>
         {/* Categoría */}
         <div
           className="grid gri-cols-1 gap-3">
