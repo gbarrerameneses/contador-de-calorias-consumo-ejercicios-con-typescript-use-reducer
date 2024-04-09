@@ -1,8 +1,13 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { Activity } from "../types"
+import { useState, ChangeEvent, FormEvent, Dispatch } from "react";
+import type { Activity } from "../types"
 import { categories } from "../data/categories"
+import { ActivityActions } from "../reducers/activity-reducer";
 
-export default function Formulario() {
+type FormProps = {
+  dispatch: Dispatch<ActivityActions>
+}
+
+export default function Formulario({dispatch}: FormProps) {
 
   const [activity, setActivity] = useState<Activity>({
     category: 1,
@@ -29,7 +34,8 @@ export default function Formulario() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log('submit');
+    // ActivityActions vienen de activity-reducer.ts
+    dispatch({type: 'save-activity', payload: {newActivity: activity}})
 
   }
   return (
