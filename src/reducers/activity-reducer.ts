@@ -5,9 +5,9 @@ export type ActivityActions = // Los Actions consta de dos partes, el type y el 
     { type: 'save-activity', payload: { newActivity: Activity } } |
     { type: 'set-activeId', payload: { id: Activity['id'] } }
 
-type ActivityState = {
+export type ActivityState = {
     activities: Activity[],
-    activeId: Activity['id']
+    activeId: Activity['id'],
 }
 
 // State Inicial

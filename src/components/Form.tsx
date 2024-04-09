@@ -1,10 +1,11 @@
-import { useState, ChangeEvent, FormEvent, Dispatch } from "react";
+import { useState, ChangeEvent, FormEvent, Dispatch, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid" // npm i uuid && npm i --save-dev @types/uuid
 import { categories } from "../data/categories"
 import type { Activity } from "../types"
-import { ActivityActions } from "../reducers/activity-reducer";
+import { ActivityState, ActivityActions } from "../reducers/activity-reducer";
 
 type FormProps = {
+  state: ActivityState,
   dispatch: Dispatch<ActivityActions>
 }
 
@@ -15,9 +16,18 @@ const initialState: Activity = {
   calories: 0
 }
 
-export default function Formulario({dispatch}: FormProps) {
+export default function Formulario({state, dispatch}: FormProps) {
 
   const [activity, setActivity] = useState<Activity>(initialState)
+
+  // ? Trae el id de la actividad que vamos a editar
+  useEffect(() => {
+    if(state.activeId){
+      const selectActivity = state.activities.filter(stateActivity => stateActivity.id === state.activeId)[0]
+      // ? Seteamos setActivity con selectActivity
+      setActivity(selectActivity)
+    }
+  }), [state.activeId]
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
     const isNumberField = ['category', 'calories'].includes(e.target.id)
