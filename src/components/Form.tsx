@@ -27,7 +27,7 @@ export default function Formulario({dispatch}: FormProps) {
   // Validación button form disabled
   const isValidActivity = () => {
     const { name, calories } = activity
-    console.log(name.trim() !== '');
+    // console.log(name.trim() !== '');
     return name.trim() !== '' && calories > 0
   }
 
