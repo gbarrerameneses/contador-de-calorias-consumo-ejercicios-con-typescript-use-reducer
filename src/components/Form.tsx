@@ -1,13 +1,15 @@
 import { useState, ChangeEvent, FormEvent, Dispatch } from "react";
-import type { Activity } from "../types"
+import { v4 as uuidv4 } from "uuid" // npm i uuid && npm i --save-dev @types/uuid
 import { categories } from "../data/categories"
+import type { Activity } from "../types"
 import { ActivityActions } from "../reducers/activity-reducer";
 
 type FormProps = {
   dispatch: Dispatch<ActivityActions>
 }
 
-const initialState = {
+const initialState: Activity = {
+  id: uuidv4(),
   category: 1,
   name: '',
   calories: 0
@@ -39,8 +41,12 @@ export default function Formulario({dispatch}: FormProps) {
     // ActivityActions vienen de activity-reducer.ts
     dispatch({type: 'save-activity', payload: {newActivity: activity}})
     // Seteando (reiniciando) el form
-    setActivity(initialState)
+    setActivity({
+      ...initialState,
+      id: uuidv4() // pasamos el id nuevo
+    })
   }
+
   return (
     <form
       className="space-y-5 bg-white shadow p-10 rounded-lg"
