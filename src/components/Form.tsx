@@ -1,17 +1,21 @@
 import { useState, ChangeEvent } from "react";
+import { Activity } from "../types"
 import { categories } from "../data/categories"
 
 export default function Formulario() {
-  const [activity, setActivity] = useState({
+
+  const [activity, setActivity] = useState<Activity>({
     category: 1,
     name: '',
     calories: 0
   })
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
+    const isNumberField = ['category', 'calories'].includes(e.target.id)
+
     setActivity({
       ...activity, // mantiene lo que ya tenemos en el State anteriormente
-      [e.target.id] : e.target.value
+      [e.target.id]: isNumberField ? +e.target.value : e.target.value // + lo convierte a número
     })
   }
 
@@ -33,7 +37,8 @@ export default function Formulario() {
 
                 {categories.map(category => (
                   <option
-                    key={category.id}>
+                    key={category.id}
+                    value={category.id}>
                     {category.name}
                   </option>
                 ))}
