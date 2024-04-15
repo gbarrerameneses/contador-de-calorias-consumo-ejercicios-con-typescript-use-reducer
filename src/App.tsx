@@ -1,4 +1,4 @@
-import { useReducer } from "react"
+import { useReducer, useEffect } from "react"
 import Formulario from "./components/Form"
 import ActivityList from "./components/ActivityList";
 import { activityReducer, initialState } from "./reducers/activity-reducer"
@@ -7,6 +7,11 @@ import { activityReducer, initialState } from "./reducers/activity-reducer"
 function App() {
 
   const [state, dispatch] = useReducer(activityReducer, initialState)
+
+  // Almacenando las actividades en localStorage
+  useEffect(() => {
+    localStorage.setItem('activities', JSON.stringify(state.activities))
+  }, [state.activities])
 
   return (
     <>
