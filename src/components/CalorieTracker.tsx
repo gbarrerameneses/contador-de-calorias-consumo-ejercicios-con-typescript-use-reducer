@@ -15,18 +15,24 @@ export default function CalorieTracker({activities} : CalorieTrackerProps) {
     const caloriesBurned = useMemo(() => activities.reduce((total, activity) =>
         activity.category === 2 ? total + activity.calories : total, 0), [activities])
 
+    const netCalories = useMemo(() => caloriesConsumed - caloriesBurned, [activities])
+
     return (
     <>
       <h2 className="text-4xl font-black text-white text-center">Resumen de Calorías</h2>
         <div className="flex flex-col items-center md:flex-row md:justify-between gap-5 mt-5">
         <CalorieDisplay
-        calories={caloriesConsumed}
-        text='Consumidas'
+            calories={caloriesConsumed}
+            text='Consumidas'
         />
-            <p className="text-white font-bold rounded-full grid grid-cols-1 gap-3 text-center">
-                <span className="font-black text-6xl text-orange">{caloriesBurned}</span>
-                Ejercicio
-            </p>
+        <CalorieDisplay
+            calories={caloriesBurned}
+            text='Ejercicio'
+        />
+        <CalorieDisplay
+            calories={netCalories}
+            text='Diferencia'
+        />
         </div>
     </>
   )
