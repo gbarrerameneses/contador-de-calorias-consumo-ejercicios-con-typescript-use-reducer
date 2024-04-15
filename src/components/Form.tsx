@@ -27,7 +27,7 @@ export default function Formulario({state, dispatch}: FormProps) {
       // ? Seteamos setActivity con selectActivity
       setActivity(selectActivity)
     }
-  }), [state.activeId]
+  }, [state.activeId])
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement> | ChangeEvent<HTMLInputElement>) => {
     const isNumberField = ['category', 'calories'].includes(e.target.id)
